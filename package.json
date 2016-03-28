@@ -1,0 +1,40 @@
+{
+  "name": "knex-generic-errors",
+  "version": "1.0.0",
+  "description": "A plugin for Knex.js to make it throw more generic errors.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha test/index.js",
+    "babel": "node_modules/.bin/babel -L -D src/ --out-dir lib/",
+    "prepublish": "npm run babel"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vellotis/knex-generic-errors.git"
+  },
+  "keywords": [
+    "knex",
+    "errors"
+  ],
+  "author": "Kaarel Raspel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vellotis/knex-generic-errors/issues"
+  },
+  "homepage": "https://github.com/vellotis/knex-generic-errors#readme",
+  "dependencies": {
+    "lodash": "^3.7.0"
+  },
+  "devDependencies": {
+    "babel": "^5.2.17",
+    "decache": "^3.0.5",
+    "knex": "^0.10.0",
+    "mocha": "^2.4.5",
+    "mocha-sinon": "^1.1.5",
+    "mssql": "^2.3.2",
+    "mysql": "^2.6.2",
+    "should": "^8.3.0",
+    "should-sinon": "0.0.5",
+    "sinon": "^1.17.3"
+  }
+}
