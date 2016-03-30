@@ -1,6 +1,6 @@
 {
   "name": "knex-generic-errors",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A plugin for Knex.js to make it throw more generic errors.",
   "main": "lib/index.js",
   "scripts": {
@@ -36,5 +36,10 @@
     "should": "^8.3.0",
     "should-sinon": "0.0.5",
     "sinon": "^1.17.3"
-  }
+  },
+  "files": [
+    "README.md",
+    "src/*",
+    "lib/*"
+  ]
 }
