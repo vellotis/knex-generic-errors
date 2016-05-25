@@ -12,9 +12,13 @@ module.exports.attach = function(knex, handler) {
 
   var client = Knex.client
   var dialectName = client.dialect
-  var dialectOverrider = require('./dialects/' + dialectName)
-  
-  assign(client, clientOverrider(client), dialectOverrider(client))
+  try {
+  	var dialectOverrider = require('./dialects/' + dialectName)
+  	
+  	assign(client, clientOverrider(client), dialectOverrider(client))
+  } catch (err) {
+  	console.warn("knex-generic-errors not implemented for dialect: " + dialectName)
+  }
 
   return Knex
 }
