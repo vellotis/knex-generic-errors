@@ -1,4 +1,4 @@
-# [knex-generic-errors](https://github.com/vellotis/knex-generic-errors)  [![Build Status](https://travis-ci.org/tgriesser/knex.svg?branch=master)](https://travis-ci.org/tgriesser/knex)
+# [knex-generic-errors](https://github.com/vellotis/knex-generic-errors)  [![Build Status](https://travis-ci.org/vellotis/knex-generic-errors.svg?branch=master)](https://travis-ci.org/vellotis/knex-generic-errors)
 
 A module for [knex.js](http://knexjs.org) that enables using more detailed "typed" errors instead of plain javascript [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error).
 
@@ -30,10 +30,10 @@ As Knex actually doesn't have an API for plugins this module has to be used as s
 
 ```js
 var Knex = require('knex');
-var knexGenericErrors = require('knex-generic-errors');
+var knexPing = require('knex-ping');
 
 // Wrap Knex initializer
-var knex = knexGenericErrors.attach(Knex, function() {
+var knex = knexPing.attach(Knex, function() {
   // Initialize Knex
   return Knex(/* connection configuration */);
 });
@@ -93,7 +93,7 @@ knex.Errors === Knex.Errors; // true
       <td><a name="knex-generic-errors-Errors"></a><b>Errors</b></td>
       <td>-</td>
       <td>-</td>
-      <td>Property that holds error types. Error types listed under <a href="#Errors">Errors</a></td>
+      <td>Property that holds error types. Error types listed under <a href="#errors">Errors</a></td>
     </tr>
   </tbody>
 </table>
