@@ -1,19 +1,18 @@
 import { inherits } from 'util'
 import { assign } from 'lodash'
 
-var errors = {}
 
-errors.BaseError = function BaseError() {  
+const BaseError = function BaseError() {  
   var superInstance = Error.apply(this)
   this.name = superInstance.name = 'BaseError'
 
   if (Error.captureStackTrace)
     Error.captureStackTrace(this, this.constructor)
 
-  var args = argsToArray(arguments)
-  var message = getMessage(args)
-  var cause = getCause(args)
-  var props = getProperties(args)
+  const args = argsToArray(arguments)
+  const message = getMessage(args)
+  const cause = getCause(args)
+  const props = getProperties(args)
 
   assign(this, props)
   if (message) this.message = message
@@ -22,42 +21,42 @@ errors.BaseError = function BaseError() {
   if (this.code == null) dynamicInherit('code', this, cause)
   if (this.errno == null) dynamicInherit('errno', this, cause)
 
-  if ((this.constructor === errors.BaseError) === false) return superInstance
+  if ((this.constructor === BaseError) === false) return superInstance
   else improveStack(this)
 }
-inherits(errors.BaseError, Error)
-errors.BaseError.prototype.toJSON = toJSON
+inherits(BaseError, Error)
+BaseError.prototype.toJSON = toJSON
 
 
-errors.DatabaseError = function DatabaseError() {
-  var superInstance = errors.BaseError.apply(this, arguments)
+const DatabaseError = function DatabaseError() {
+  const superInstance = BaseError.apply(this, arguments)
   this.name = superInstance.name = 'DatabaseError'
-  if ((this.constructor === errors.DatabaseError) === false) return superInstance
+  if ((this.constructor === DatabaseError) === false) return superInstance
   else improveStack(this)
 }
-inherits(errors.DatabaseError, errors.BaseError)
+inherits(DatabaseError, BaseError)
 
 
-errors.QueryError = function QueryError() {
-  var superInstance = errors.DatabaseError.apply(this, arguments)
+const QueryError = function QueryError() {
+  const superInstance = DatabaseError.apply(this, arguments)
   this.name = superInstance.name = 'QueryError'
-  if ((this.constructor === errors.QueryError) === false) return superInstance
+  if ((this.constructor === QueryError) === false) return superInstance
   else improveStack(this)
 }
-inherits(errors.QueryError, errors.DatabaseError)
+inherits(QueryError, DatabaseError)
 
 
-errors.ConnectionError = function ConnectionError() {
-  var superInstance = errors.DatabaseError.apply(this, arguments)
+const ConnectionError = function ConnectionError() {
+  const superInstance = DatabaseError.apply(this, arguments)
   this.name = superInstance.name = 'ConnectionError'
-  if ((this.constructor === errors.ConnectionError) === false) return superInstance
+  if ((this.constructor === ConnectionError) === false) return superInstance
   else improveStack(this)
 }
-inherits(errors.ConnectionError, errors.DatabaseError)
+inherits(ConnectionError, DatabaseError)
 
 
 function getMessage(args) {
-  for (var i = 0, j = args.length; i < 2 && i < j; i++ ) {
+  for (let i = 0, j = args.length; i < 2 && i < j; i++ ) {
     if (typeof args[i] === 'string') {
       return args.splice(i, 1)[0] 
     }
@@ -66,7 +65,7 @@ function getMessage(args) {
 }
 
 function getCause(args) {
-  for (var i = 0, j = args.length; i < 2 && i < j; i++ ) {
+  for (let i = 0, j = args.length; i < 2 && i < j; i++ ) {
     if (args[0] instanceof Error) {
       return args.splice(i, 1)[0]
     }
@@ -92,10 +91,10 @@ function dynamicInherit(propName, target, cause) {
 }
 
 function improveStack(obj) {
-  var stack = obj.stack
+  const stack = obj.stack
   Object.defineProperty(obj, 'stack', {
     get: function() {
-      var _stack = ''
+      let _stack = ''
       _stack += stack
       
       if (obj.cause && obj.cause.stack) {
@@ -108,7 +107,7 @@ function improveStack(obj) {
 }
 
 function toJSON() {
-  var json =  {}
+  const json =  {}
   Object.getOwnPropertyNames(this).forEach(function (name) {
       json[name] =
         name === 'stack'
@@ -123,11 +122,11 @@ function toJSON() {
 }
 
 function argsToArray(args) {
-  var argsArray = new Array(args.length)
-  for (var i = 0; i < args.length; i++) {
+  const argsArray = new Array(args.length)
+  for (let i = 0; i < args.length; i++) {
       argsArray[i] = args[i]
   }
   return argsArray
 }
 
-module.exports = errors
+export { BaseError, DatabaseError, QueryError, ConnectionError }

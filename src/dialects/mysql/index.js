@@ -1,15 +1,15 @@
-var errorPredicates = require('./errors')
-var errors = require('../../errors')
+import * as errorPredicates from './errors'
+import {ConnectionError} from '../../errors'
 
 import { isFunction } from 'lodash'
 
-module.exports = function(origClient) {
+export default function() {
   return {
     _convertError: function convertError(err, callback) {
       if (errorPredicates.ConnectionError(err)) {
-        err = new errors.ConnectionError('Could not connect to the database', err)
+        err = new ConnectionError('Could not connect to the database', err)
       } else if (errorPredicates.MysqlProtocolError(err) || errorPredicates.NetworkError(err)) {
-        err = new errors.ConnectionError('Database connection dropped', err)
+        err = new ConnectionError('Database connection dropped', err)
       }
 
       if (isFunction(callback)) {

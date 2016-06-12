@@ -1,1 +1,1 @@
-module.exports = function(origClient) { return {/* Nothing special for MSSQL */} }
+export default function() { return {/* Nothing special for MSSQL */} }

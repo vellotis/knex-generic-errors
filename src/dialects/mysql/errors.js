@@ -1,6 +1,5 @@
-var errorPredicates = {}
 
-errorPredicates.ConnectionError = function(err) {
+export function ConnectionError(err) {
   if (!err || !err.code) return false
 
   return fastIncludes(err, [
@@ -9,7 +8,7 @@ errorPredicates.ConnectionError = function(err) {
     ])
 }
 
-errorPredicates.MysqlProtocolError = function(err) {
+export function MysqlProtocolError(err) {
   if (!err || !err.code) return false
 
   return fastIncludes(err, [
@@ -20,7 +19,7 @@ errorPredicates.MysqlProtocolError = function(err) {
     ])
 }
 
-errorPredicates.MysqlServerError = function (err) {
+export function MysqlServerError(err) {
   if (!err || !err.code) return false
 
   return fastIncludes(err, [
@@ -211,7 +210,7 @@ errorPredicates.MysqlServerError = function (err) {
     ])
 }
 
-errorPredicates.NetworkError = function(err) {
+export function NetworkError(err) {
   if (!err || !err.code) return false
 
   return fastIncludes(err, [
@@ -235,5 +234,3 @@ function fastIncludes(err, arr) {
   }
   return false
 }
-
-module.exports = errorPredicates

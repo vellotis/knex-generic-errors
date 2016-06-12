@@ -1,1 +1,1 @@
-module.exports = function(origClient) { return {/* Nothing special for Postgres */} }
+export default function() { return {/* Nothing special for Postgres */} }

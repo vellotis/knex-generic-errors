@@ -1,10 +1,10 @@
-var errors = require('./errors')
+import {QueryError} from '../../errors'
 
 import { pick } from 'lodash'
 
-module.exports = function(origClient) {
-  var orig
-  var overrides = {
+export default  function(origClient) {
+  let orig
+  const overrides = {
     query: function(connection, obj) {
       var client = this
       return orig.query.apply(this, arguments)
@@ -12,7 +12,7 @@ module.exports = function(origClient) {
           if (client._convertError) {
             err = client._convertError(err)
           }
-          err = new errors.QueryError(err.message, err, {sql: obj.sql, bindings: obj.bindings})
+          err = new QueryError(err.message, err, {sql: obj.sql, bindings: obj.bindings})
           throw err
         })
     },
@@ -31,5 +31,5 @@ module.exports = function(origClient) {
 
   orig = pick(origClient, Object.keys(overrides))
 
-  return overrides;
+  return overrides
 }

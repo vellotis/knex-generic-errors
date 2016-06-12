@@ -4,9 +4,10 @@
   "description": "A plugin for Knex.js to make it throw more generic errors.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha test/index.js",
     "babel": "node_modules/.bin/babel -L -D src/ --out-dir lib/",
-    "prepublish": "node_modules/.bin/rimraf lib && npm run babel"
+    "judge": "node_modules/.bin/rimraf node_modules/.judge && judge install",
+    "prepublish": "node_modules/.bin/rimraf lib && npm run babel",
+    "test": "npm run judge && mocha test/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,11 +24,13 @@
   },
   "homepage": "https://github.com/vellotis/knex-generic-errors#readme",
   "dependencies": {
-    "lodash": "^3.7.0"
+    "lodash": "^3.7.0",
+    "semver": "^5.1.0"
   },
   "devDependencies": {
     "babel": "^5.2.17",
     "decache": "^3.0.5",
+    "judge": "^0.1.1",
     "knex": "^0.10||^0.11",
     "mocha": "^2.4.5",
     "mocha-sinon": "^1.1.5",
@@ -40,6 +43,17 @@
   },
   "peerDependencies": {
     "knex": "^0.10||^0.11"
+  },
+  "judge": {
+    "knex-0.10": {
+      "knex": "^0.10"
+    },
+    "knex-0.11": {
+      "knex": "^0.11.0 <0.11.4"
+    },
+    "knex-0.11.4": {
+      "knex": "^0.11.4"
+    }
   },
   "files": [
     "README.md",

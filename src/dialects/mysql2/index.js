@@ -1,1 +1,1 @@
-module.exports = require('../mysql')
+export {default} from '../mysql'

@@ -1,1 +1,1 @@
-module.exports = function(origClient) { return {/* Nothing special for SQLite */} }
+export default function() { return {/* Nothing special for SQLite */} }

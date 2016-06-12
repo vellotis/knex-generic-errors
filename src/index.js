@@ -1,19 +1,31 @@
-var clientOverrider = require('./client')
-var errors = require('./errors')
-
+import * as errors from './errors'
 import { assign } from 'lodash'
+import semver from 'semver'
+import fs from 'fs'
+import path from 'path'
 
-module.exports.Errors = errors
-module.exports.attach = function(knex, handler) {
+export { errors as Errors }
+export function attach(knex, handler) {
   knex.Errors = errors
 
-  var Knex = handler()
+  const Knex = handler()
   Knex.errors = errors
 
-  var client = Knex.client
-  var dialectName = client.dialect
+  const { client } = Knex
+  const dialectName = client.dialect
+
+  const versions = fs.readdirSync(path.join(__dirname, './versions'))
+  const [version] = versions.sort().reverse().filter(function(version) {
+    return semver.satisfies(Knex.VERSION, `^${ version }`)
+  })
+
+  if (!version) {
+    throw new Error(`knex@${ Knex.VERSION } is not supported`)
+  }
+  const clientOverrider = require(`./versions/${ version }/client`)
+
   try {
-  	var dialectOverrider = require('./dialects/' + dialectName)
+    const dialectOverrider = require(`./dialects//${ dialectName }`)
   	
   	assign(client, clientOverrider(client), dialectOverrider(client))
   } catch (err) {
