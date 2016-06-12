@@ -2,6 +2,10 @@
 
 A module for [knex.js](http://knexjs.org) that enables using more detailed "typed" errors instead of plain javascript [`Error`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error).
 
+Supported knex versions:
+- ^0.10
+- ^0.11
+
 Supported dialects:
 - [ ] MariaDB ([mariasql](https://www.npmjs.com/package/mariasql))
 - [ ] MSSQL ([mssql](https://www.npmjs.com/package/mssql))
