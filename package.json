@@ -1,6 +1,6 @@
 {
   "name": "knex-generic-errors",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A plugin for Knex.js to make it throw more generic errors.",
   "main": "lib/index.js",
   "scripts": {
@@ -31,7 +31,7 @@
     "babel": "^5.2.17",
     "decache": "^3.0.5",
     "judge": "^0.1.1",
-    "knex": "^0.10||^0.11",
+    "knex": "^0.10||^0.11||^0.12",
     "mocha": "^2.4.5",
     "mocha-sinon": "^1.1.5",
     "mssql": "^2.3.2",
