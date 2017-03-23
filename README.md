@@ -5,6 +5,7 @@ A module for [knex.js](http://knexjs.org) that enables using more detailed "type
 Supported knex versions:
 - ^0.10
 - ^0.11
+- ^0.12
 
 Supported dialects:
 - [ ] MariaDB ([mariasql](https://www.npmjs.com/package/mariasql))
