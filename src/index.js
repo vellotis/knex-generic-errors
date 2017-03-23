@@ -5,22 +5,22 @@ import fs from 'fs'
 import path from 'path'
 
 export { errors as Errors }
-export function attach(knex, handler) {
-  knex.Errors = errors
+export function attach(Knex, handler) {
+  Knex.Errors = errors
 
-  const Knex = handler()
-  Knex.errors = errors
+  const knex = handler()
+  knex.errors = errors
 
-  const { client } = Knex
+  const { client } = knex
   const dialectName = client.dialect
 
   const versions = fs.readdirSync(path.join(__dirname, './versions'))
   const [version] = versions.sort().reverse().filter(function(version) {
-    return semver.satisfies(Knex.VERSION, `^${ version }`)
+    return semver.satisfies(knex.VERSION, `^${ version }`)
   })
 
   if (!version) {
-    throw new Error(`knex@${ Knex.VERSION } is not supported`)
+    throw new Error(`knex@${ knex.VERSION } is not supported`)
   }
   const clientOverrider = require(`./versions/${ version }/client`)
 
@@ -32,5 +32,5 @@ export function attach(knex, handler) {
   	console.warn("knex-generic-errors not implemented for dialect: " + dialectName)
   }
 
-  return Knex
+  return knex
 }

@@ -22,7 +22,7 @@ Supported dialects:
 ## Installation
 
 ```sh
-$ npm install nex-generic-errors --save-dev
+$ npm install knex-generic-errors --save-dev
 ```
 
 ## Usage
