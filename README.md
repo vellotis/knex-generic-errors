@@ -31,10 +31,10 @@ As Knex actually doesn't have an API for plugins this module has to be used as s
 
 ```js
 var Knex = require('knex');
-var knexPing = require('knex-ping');
+var knexGenericErrors = require('knex-generic-errors');
 
 // Wrap Knex initializer
-var knex = knexPing.attach(Knex, function() {
+var knex = knexGenericErrors.attach(Knex, function() {
   // Initialize Knex
   return Knex(/* connection configuration */);
 });
